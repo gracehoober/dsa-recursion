@@ -59,9 +59,15 @@ function find(arr, val) {
 // a === c | true -> coc
 // c === c | true -> o -> true (base case)
 
+
+// noon
+// n === n | true -> 00
+// o === o | true -> ""
+// true (base case)
+
 function isPalindrome(str) {
   if (str.length <= 1) return true;
-  return (str[0] === str[-1]) && isPalindrome(str.slice(1, str.length - 1));
+  return (str[0] === str[str.length - 1]) && isPalindrome(str.slice(1, str.length - 1));
 }
 
 /** revString: return a copy of a string, but in reverse. */
@@ -79,22 +85,38 @@ function revString(str) {
 // cat [pony] -> true
 // pony -> false
 
+// ["duck", "cat", "pony"]
+
 function findIndex(arr, val) {
   if (arr.length === 0) return -1;
   if (arr[0] === val) return 0;
 
-    if(findIndex(arr.slice(1)) === -1){
-      return 1;
-    }
-    //debugger
-  return 1 + findIndex(arr.slice(1), val);
+  const curIndex = findIndex(arr.slice(1), val);
 
+  if (curIndex === -1) {
+    return -1;
+  }
+
+  return 1 + curIndex;
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-function gatherStrings(obj) {
+// Loop through the object, append to res array when property is a string, otherwise go deeper intpo the data structure.
 
+function gatherStrings(obj) {
+  let strings = [];
+
+  for (const key in obj) {
+
+    if (typeof obj[key] === "string") {
+      strings.push(obj[key]);
+    } else if (typeof obj[key] === "object"){
+      strings = strings.concat(gatherStrings(obj[key]));
+    }
+  }
+
+  return strings;
 }
 
 // FURTHER STUDY
