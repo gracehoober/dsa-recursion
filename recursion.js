@@ -123,8 +123,25 @@ function gatherStrings(obj) {
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return true if val is in array, false if not present). */
-
+/**
+ * base case = [one thing in here]
+ * [1,2,3,4]
+ * [1,2]
+ * [1]
+ *
+ */
 function binarySearch(arr, val) {
+  if(arr.length === 0) return false;
+  if(arr.length === 1) return arr[0] === val;
+  let mid = Math.floor((arr.length-1)/2);
+
+ if(arr[mid] > val){
+  return false || binarySearch(arr.slice(0, mid), val)
+ }else if(arr[mid] < val){
+  return false || binarySearch(arr.slice(mid + 1), val)
+ }else{
+  return true;
+ }
 
 }
 
