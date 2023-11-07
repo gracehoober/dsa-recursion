@@ -77,14 +77,18 @@ function revString(str) {
 // ["duck", "cat", "pony"] | cat
 // duck [cat, pony] -> false
 // cat [pony] -> true
-// pony -> true
+// pony -> false
 
 function findIndex(arr, val) {
   if (arr.length === 0) return -1;
-  for (const i of arr.length) {
-    if (arr[i] === val) return i;
-    return i + findIndex(arr.slice(i));
-  }
+  if (arr[0] === val) return 0;
+
+    if(findIndex(arr.slice(1)) === -1){
+      return 1;
+    }
+    //debugger
+  return 1 + findIndex(arr.slice(1), val);
+
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
