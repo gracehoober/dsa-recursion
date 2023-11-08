@@ -7,10 +7,10 @@
  */
 
 function product(nums) {
-  if(nums.length === 0){
-    return 1
+  if (nums.length === 0) {
+    return 1;
   }
-  return nums[0] * product(nums.slice(1))
+  return nums[0] * product(nums.slice(1));
 }
 
 /** longest: return the length of the longest word in an array of words. */
@@ -19,10 +19,10 @@ function product(nums) {
  *
  */
 function longest(words) {
-  if(words.length === 0){
+  if (words.length === 0) {
     return 0;
   }
-  return Math.max(words[0].length, longest(words.slice(1)))
+  return Math.max(words[0].length, longest(words.slice(1)));
 }
 
 /** everyOther: return a string with every other letter. */
@@ -30,7 +30,7 @@ function longest(words) {
  * hello ->
  * he   llo -> h
  * he ll o -> hl
- * he ll 0 | -> hlo
+ * he ll o | -> hlo
  *
  */
 
@@ -111,7 +111,7 @@ function gatherStrings(obj) {
 
     if (typeof obj[key] === "string") {
       strings.push(obj[key]);
-    } else if (typeof obj[key] === "object"){
+    } else if (typeof obj[key] === "object") {
       strings = strings.concat(gatherStrings(obj[key]));
     }
   }
@@ -131,17 +131,17 @@ function gatherStrings(obj) {
  *
  */
 function binarySearch(arr, val) {
-  if(arr.length === 0) return false;
-  if(arr.length === 1) return arr[0] === val;
-  let mid = Math.floor((arr.length-1)/2);
+  if (arr.length === 0) return false;
+  if (arr.length === 1) return arr[0] === val;
+  let mid = Math.floor((arr.length - 1) / 2);
 
- if(arr[mid] > val){
-  return false || binarySearch(arr.slice(0, mid), val)
- }else if(arr[mid] < val){
-  return false || binarySearch(arr.slice(mid + 1), val)
- }else{
-  return true;
- }
+  if (arr[mid] > val) {
+    return false || binarySearch(arr.slice(0, mid), val);
+  } else if (arr[mid] < val) {
+    return false || binarySearch(arr.slice(mid + 1), val);
+  } else {
+    return true;
+  }
 
 }
 
@@ -150,14 +150,25 @@ function binarySearch(arr, val) {
  * return the index of that value (or -1 if val is not present). */
 
 function binarySearchIndex(arr, val) {
+  if (arr.length === 0) return -1;
 
+  let mid = Math.floor((arr.length - 1) / 2);
+
+  if (arr[mid] > val) {
+    let curIndex = binarySearchIndex(arr.slice(0, mid), val);
+    // debugger;
+    if (curIndex === -1) return -1;
+    return curIndex;
+  } else if (arr[mid] < val) {
+    let curIndex = binarySearchIndex(arr.slice(mid + 1), val);
+    // debugger;
+    if (curIndex === -1) return -1;
+    return mid + 1 + curIndex;
+  } else {
+    // debugger;
+    return mid;
+  }
 }
-
-// you might find the above two problems easier if you change the function signature to:
-//
-// function binarySearch(arr, val, left = 0, right = arr.length) {
-//
-// }
 
 
 module.exports = {
